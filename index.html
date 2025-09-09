@@ -1,59 +1,304 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <title>Abdulrahman – iOS Developer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abdulrahman Athamnah – iOS Developer</title>
+  <meta name="description" content="Portfolio of Abdulrahman Athamnah – iOS Developer specializing in Swift, UIKit, XIB, and payment integrations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
+    :root{
+      --bg: #0b0d10;        /* dark background */
+      --panel: #12161b;     /* card background */
+      --text: #e8eef5;      /* primary text */
+      --muted:#98a2b3;      /* secondary text */
+      --brand:#3ddc84;      /* Android green-esque but works as accent */
+      --accent:#7c3aed;     /* purple accent */
+      --border:#1f2730;     /* subtle border */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+      --maxw: 1120px;
     }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    @media (prefers-color-scheme: light){
+      :root{ --bg:#f7f8fa; --panel:#ffffff; --text:#101828; --muted:#475467; --border:#e4e7ec; --shadow:0 10px 20px rgba(16,24,40,.08);}  
     }
-    h1, h2 {
-      color: #222;
-    }
-    .project {
-      margin-bottom: 20px;
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text);} 
+    a{color:inherit}
+    .container{max-width:var(--maxw); margin:0 auto; padding:24px}
+    header{position:sticky;top:0; backdrop-filter:saturate(180%) blur(12px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid var(--border); z-index:50}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 24px; max-width:var(--maxw); margin:0 auto}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .avatar{width:36px;height:36px;border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--brand)); box-shadow:var(--shadow)}
+    .brand h1{font-size:16px; margin:0; letter-spacing:.3px}
+    .nav a.link{padding:8px 12px; text-decoration:none; color:var(--muted); border-radius:10px}
+    .nav a.link:hover{background:var(--panel); color:var(--text)}
+    .actions{display:flex; gap:10px}
+    .btn{border:1px solid var(--border); background:var(--panel); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer; box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px)}
+
+    /* Hero */
+    .hero{padding:64px 24px}
+    .hero-wrap{display:grid; grid-template-columns: 1.2fr .8fr; gap:28px; align-items:center}
+    .badge{display:inline-flex; align-items:center; gap:8px; background:linear-gradient( to right, color-mix(in oklab, var(--accent) 22%, transparent), color-mix(in oklab, var(--brand) 25%, transparent) ); border:1px solid var(--border); padding:6px 10px; border-radius:999px; color:var(--text)}
+    .title{font-size:44px; line-height:1.1; margin:14px 0 10px}
+    .subtitle{color:var(--muted); font-size:18px; margin:0 0 18px}
+    .pillbar{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 26px}
+    .pill{padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--panel); color:var(--muted)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .cta .primary{background:linear-gradient(135deg,var(--accent),var(--brand)); color:white; border:0}
+
+    .glass{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card{padding:20px}
+
+    /* Sections */
+    section{padding:28px 24px}
+    section h2{font-size:26px; margin:0 0 18px}
+
+    /* Projects grid */
+    .grid{display:grid; gap:18px}
+    @media (min-width:720px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (min-width:1024px){ .grid{ grid-template-columns: repeat(3, 1fr);} }
+
+    .project{display:flex; flex-direction:column; gap:10px}
+    .thumb{aspect-ratio: 16/10; border-radius:12px; background:linear-gradient(135deg, color-mix(in oklab, var(--accent) 25%, transparent), color-mix(in oklab, var(--brand) 35%, transparent)); border:1px solid var(--border); position:relative; overflow:hidden}
+    .thumb small{position:absolute; inset:auto 10px 10px 10px; color:#fff; opacity:.85}
+    .project h3{margin:2px 0 0; font-size:18px}
+    .meta{display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:13px}
+
+    /* Timeline */
+    .timeline{display:grid; gap:14px}
+    .job{display:flex; gap:14px}
+    .job .dot{width:12px;height:12px;border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--accent)); margin-top:6px}
+    .job .content{flex:1}
+    .job h4{margin:0 0 6px}
+    .job p{margin:0; color:var(--muted)}
+
+    /* Footer */
+    footer{padding:32px 24px; border-top:1px solid var(--border); color:var(--muted)}
+
+    /* Utilities */
+    .row{display:flex; gap:14px; flex-wrap:wrap}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0}
+
+    /* Responsive */
+    @media (max-width:900px){ .hero-wrap{grid-template-columns: 1fr; } }
+
+    /* RTL support toggled by JS */
+    html[dir="rtl"] .hero-wrap { direction: rtl; }
+    html[dir="rtl"] .nav a.link { direction: rtl; }
+    html[dir="rtl"] body { font-family: Inter, system-ui, -apple-system, Segoe UI, "Cairo", Roboto, Helvetica, Arial; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Hi, I'm Abdulrahman 👋</h1>
-    <p>iOS Developer specializing in Swift, UIKit, and building modern mobile apps with clean UI/UX.</p>
+  <!-- Header / Nav -->
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#home" aria-label="Home">
+        <span class="avatar" aria-hidden="true"></span>
+        <h1>Abdulrahman Athamnah</h1>
+      </a>
+      <div class="row">
+        <a class="link" href="#projects">Projects</a>
+        <a class="link" href="#skills">Skills</a>
+        <a class="link" href="#experience">Experience</a>
+        <a class="link" href="#contact">Contact</a>
+      </div>
+      <div class="actions">
+        <button id="langBtn" class="btn" aria-label="Switch language">AR</button>
+        <button id="modeBtn" class="btn" aria-label="Toggle theme">☾</button>
+      </div>
+    </nav>
+  </header>
 
-    <h2>🚀 Projects</h2>
-    <div class="project">
-      <h3>GoldenDrive – Car Rental App</h3>
-      <p>A car rental app with booking flows (daily, monthly, subscription) and online payments.</p>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <span class="badge">iOS Developer · Swift · UIKit · XIB</span>
+        <h2 class="title" data-i18n="title">Building polished iOS apps with clean architecture & beautiful UI/UX.</h2>
+        <p class="subtitle" data-i18n="subtitle">Specialized in multilingual apps (EN/AR), payment integrations (NGenius), and converting Storyboards to scalable XIB architecture.</p>
+
+        <div class="pillbar">
+          <span class="pill">Swift · UIKit · SwiftUI</span>
+          <span class="pill">Alamofire · REST API</span>
+          <span class="pill">Localization (RTL/LTR)</span>
+          <span class="pill">App Store Connect</span>
+        </div>
+
+        <div class="cta">
+          <a class="btn primary" href="#projects" data-i18n="viewProjects">View Projects</a>
+          <a class="btn" href="https://github.com/Athamnah" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn" href="mailto:you@example.com">Email</a>
+        </div>
+      </div>
+      <div class="glass card">
+        <h3 style="margin:0 0 8px">At a glance</h3>
+        <p style="margin:0;color:var(--muted)">Blue Ray for Web Solutions · 3+ yrs</p>
+        <ul style="margin:14px 0 0; padding-left:18px; line-height:1.9">
+          <li>GoldenDrive – car rental (daily/monthly/subscription) with NGenius</li>
+          <li>Tasali – marketplace with offers & categories</li>
+          <li>Montak Express – logistics & order management</li>
+        </ul>
+      </div>
     </div>
+  </section>
 
-    <div class="project">
-      <h3>Tasali – Marketplace App</h3>
-      <p>Multi-vendor marketplace app with categories, offers, and localization support.</p>
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <h2 data-i18n="projects">Projects</h2>
+      <div class="grid">
+        <!-- Project 1 -->
+        <article class="project glass card">
+          <div class="thumb" aria-hidden="true"><small>GoldenDrive – iOS</small></div>
+          <h3>GoldenDrive · Car Rental</h3>
+          <p class="meta">Swift · UIKit · XIB · Alamofire · NGenius SDK · Localization</p>
+          <p style="margin:0">Booking flows (daily/weekly/monthly/subscription), dynamic add‑ons with real‑time price updates, in‑app card payments, and RTL/LTR UI.</p>
+          <div class="row" style="margin-top:10px">
+            <a class="btn" href="#" aria-disabled="true">App Store (private)</a>
+            <a class="btn" href="#" aria-disabled="true">Case study</a>
+          </div>
+        </article>
+        <!-- Project 2 -->
+        <article class="project glass card">
+          <div class="thumb" aria-hidden="true"><small>Tasali – iOS</small></div>
+          <h3>Tasali · Marketplace</h3>
+          <p class="meta">Swift · REST · Caching · XIB · Analytics</p>
+          <p style="margin:0">Multi‑vendor marketplace with banners, categories, brand pages, and performance‑oriented collection layouts.</p>
+          <div class="row" style="margin-top:10px">
+            <a class="btn" href="#" aria-disabled="true">TestFlight (by invite)</a>
+            <a class="btn" href="#" aria-disabled="true">Case study</a>
+          </div>
+        </article>
+        <!-- Project 3 -->
+        <article class="project glass card">
+          <div class="thumb" aria-hidden="true"><small>Montak Express – iOS</small></div>
+          <h3>Montak Express · Delivery</h3>
+          <p class="meta">Swift · Networking · Barcodes · CoreLocation</p>
+          <p style="margin:0">Driver app with order states, barcode scanning for parcel handover, and crash‑rate drive‑down via QA & ASC instrumentation.</p>
+          <div class="row" style="margin-top:10px">
+            <a class="btn" href="#" aria-disabled="true">Internal build</a>
+            <a class="btn" href="#" aria-disabled="true">Case study</a>
+          </div>
+        </article>
+      </div>
     </div>
+  </section>
 
-    <h2>🛠 Skills</h2>
-    <ul>
-      <li>Swift, UIKit, SwiftUI</li>
-      <li>Alamofire, REST API</li>
-      <li>XIB / AutoLayout, Figma Integration</li>
-      <li>App Store Connect, Firebase, Git</li>
-    </ul>
+  <!-- Skills -->
+  <section id="skills">
+    <div class="container">
+      <h2 data-i18n="skills">Skills</h2>
+      <div class="grid">
+        <div class="glass card">
+          <h3>iOS</h3>
+          <p class="meta">Swift, UIKit, SwiftUI, Combine, AutoLayout, XIB</p>
+        </div>
+        <div class="glass card">
+          <h3>Networking</h3>
+          <p class="meta">Alamofire, URLSession, REST, JSON, Auth, Retry</p>
+        </div>
+        <div class="glass card">
+          <h3>Product</h3>
+          <p class="meta">App Store Connect, Crashlytics, Firebase, A/B, Analytics</p>
+        </div>
+        <div class="glass card">
+          <h3>UX & Localization</h3>
+          <p class="meta">Figma, RTL/LTR, Dynamic Type, Accessibility</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <h2>📬 Contact</h2>
-    <p>Email: youremail@example.com</p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
-  </div>
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <h2 data-i18n="experience">Experience</h2>
+      <div class="timeline">
+        <div class="job">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="content glass card">
+            <h4>iOS Developer · Blue Ray for Web Solutions</h4>
+            <p>2022 – Present · Amman, Jordan</p>
+            <p style="margin-top:8px">Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container glass card">
+      <h2 data-i18n="contact">Contact</h2>
+      <p class="meta" style="margin:0 0 10px">Available for full‑time roles and freelance projects.</p>
+      <div class="row">
+        <a class="btn" href="mailto:you@example.com">you@example.com</a>
+        <a class="btn" href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Athamnah" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://wa.me/962799525660" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn" href="#" aria-disabled="true">Download CV (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Abdulrahman Athamnah. Built with GitHub Pages.
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Theme toggle
+    const modeBtn = document.getElementById('modeBtn');
+    const THEME_KEY = 'ath-theme';
+    const applyTheme = (t) => { document.documentElement.dataset.theme = t; if(t==='light'){document.documentElement.style.setProperty('--bg','#f7f8fa');} }
+    modeBtn.addEventListener('click', () => {
+      const current = localStorage.getItem(THEME_KEY) || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      localStorage.setItem(THEME_KEY, next);
+      document.body.classList.toggle('light');
+    });
+
+    // Language (EN/AR)
+    const i18n = {
+      en: {
+        title: 'Building polished iOS apps with clean architecture & beautiful UI/UX.',
+        subtitle: 'Specialized in multilingual apps (EN/AR), payment integrations (NGenius), and converting Storyboards to scalable XIB architecture.',
+        viewProjects: 'View Projects',
+        projects: 'Projects', skills: 'Skills', experience: 'Experience', contact: 'Contact'
+      },
+      ar: {
+        title: 'ببني تطبيقات iOS مصقولة بهندسة نظيفة وتجربة مستخدم جميلة.',
+        subtitle: 'متخصص في التطبيقات ثنائية اللغة (عربي/إنجليزي)، ودمج الدفع الإلكتروني (NGenius)، وتحويل Storyboard إلى XIB قابل للتوسع.',
+        viewProjects: 'شاهد المشاريع',
+        projects: 'المشاريع', skills: 'المهارات', experience: 'الخبرة', contact: 'تواصل'
+      }
+    };
+    const langBtn = document.getElementById('langBtn');
+    const LANG_KEY = 'ath-lang';
+    function setLang(lang){
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = dict[el.dataset.i18n] });
+      document.documentElement.lang = lang === 'ar' ? 'ar' : 'en';
+      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
+    }
+    langBtn.addEventListener('click', ()=>{
+      const cur = localStorage.getItem(LANG_KEY) || 'en';
+      const next = cur === 'en' ? 'ar' : 'en';
+      localStorage.setItem(LANG_KEY, next);
+      setLang(next);
+    });
+    // init
+    setLang(localStorage.getItem(LANG_KEY) || 'en');
+  </script>
 </body>
 </html>
