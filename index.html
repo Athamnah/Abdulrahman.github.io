@@ -94,12 +94,12 @@
     .pillbar{display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 18px}
     .pill{padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:var(--panel); color:var(--muted); font-size:14px}
 
-    /* Grid */
+    /* Sections */
     section{padding-block: clamp(20px, 5vw, 32px)}
     section h2{font-size: clamp(20px, 3vw, 26px); margin:0 0 14px}
-    .grid{display:grid; gap:14px}
-    @media (min-width:680px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
-    @media (min-width:1040px){ .grid{ grid-template-columns: repeat(3, 1fr);} }
+
+    /* Projects grid (auto-fit layout) */
+    .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(14px, 2.2vw, 24px); align-items:start}
 
     .project{display:flex; flex-direction:column; gap:10px}
     .thumb{aspect-ratio: 16/10; border-radius:12px; background:linear-gradient(135deg, color-mix(in oklab, var(--accent) 25%, transparent), color-mix(in oklab, var(--brand) 35%, transparent)); border:1px solid var(--border); position:relative; overflow:hidden}
@@ -232,7 +232,7 @@
           </article>
           <!-- Project 3 -->
           <article class="project glass card">
-            $1
+            <div class="thumb" aria-hidden="true"><small>Montak Express – iOS</small></div>
             <h3>Montak Express · Delivery</h3>
             <p class="meta">Swift · Networking · Barcodes · CoreLocation</p>
             <p style="margin:0" data-i18n="p3desc">Driver app with order states, barcode scanning for parcel handover, and crash‑rate drive‑down via QA & ASC instrumentation.</p>
@@ -251,7 +251,18 @@
               <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
               <a class="btn" href="/case-studies/school-model.html">Case study</a>
             </div>
-          $1
+          </article>
+          <!-- Project 5 -->
+          <article class="project glass card">
+            <div class="thumb" aria-hidden="true"><small>JaberMall – iOS</small></div>
+            <h3>JaberMall · E‑commerce</h3>
+            <p class="meta">Swift · Alamofire · Payments · Caching · Analytics</p>
+            <p style="margin:0" data-i18n="p5desc">E‑commerce app with checkout, address management, coupons, and NGenius payments integration.</p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
+              <a class="btn" href="/case-studies/jabermall.html">Case study</a>
+            </div>
+          </article>
           <!-- Project 6 -->
           <article class="project glass card">
             <div class="thumb" aria-hidden="true"><small>Montak – iOS</small></div>
@@ -306,7 +317,10 @@
               <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
               <a class="btn" href="/case-studies/wozefati.html">Case study</a>
             </div>
-          </article>$1
+          </article>
+        </div>
+      </div>
+    </section>
 
     <!-- Skills -->
     <section id="skills">
@@ -419,7 +433,24 @@
 
     // Language (EN/AR) – expanded coverage
     const i18n = {
-      $1
+      en: {
+        badge: 'iOS Developer · Swift · UIKit · XIB',
+        title: 'Building polished iOS apps with clean architecture & beautiful UI/UX.',
+        subtitle: 'Specialized in multilingual apps (EN/AR), payment integrations (NGenius), and converting Storyboards to scalable XIB architecture.',
+        viewProjects: 'View Projects',
+        projects: 'Projects', skills: 'Skills', experience: 'Experience', contact: 'Contact',
+        emailCta:'Email', pillLoc:'Localization (RTL/LTR)',
+        glanceTitle:'At a glance', glanceSub:'Blue Ray for Web Solutions · 1+ yrs',
+        gl1:'GoldenDrive – car rental (daily/monthly/subscription) with NGenius',
+        gl2:'Tasali – marketplace with offers & categories',
+        gl3:'Montak Express – logistics & order management',
+        p1desc:'Booking flows (daily/weekly/monthly/subscription), dynamic add‑ons with real‑time price updates, in‑app card payments, and RTL/LTR UI.',
+        p2desc:'Multi‑vendor marketplace with banners, categories, brand pages, and performance‑oriented collection layouts.',
+        p3desc:'Driver app with order states, barcode scanning for parcel handover, and crash‑rate drive‑down via QA & ASC instrumentation.',
+        p4desc:'Parent app with student tracking, attendance, payments, and bilingual UI (AR/EN).',
+        p5desc:'E‑commerce app with checkout, address management, coupons, and NGenius payments integration.',
+        p6desc:'Marketplace app with rich offers, categories, and fast XIB-based architecture.',
+        p7desc:'Food & beverage delivery app with live tracking, order scheduling, and bilingual UI.',
         p8desc:'Shopping app with smart cart, discounts, and bilingual support.',
         p9desc:'Digital wallet enabling QR payments, balance tracking, and instant peer transfers.',
         p10desc:'Job search app with filters, location-based listings, and instant alerts.',
@@ -429,7 +460,24 @@
         expBody:'Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.',
         availability:'Available for full‑time roles and freelance projects.'
       },
-      $1
+      ar: {
+        badge: 'مطوّر iOS · سويفت · UIKit · XIB',
+        title: 'ببني تطبيقات iOS مصقولة بهندسة نظيفة وتجربة مستخدم جميلة.',
+        subtitle: 'متخصص في التطبيقات ثنائية اللغة (عربي/إنجليزي)، ودمج الدفع الإلكتروني (NGenius)، وتحويل Storyboard إلى XIB قابل للتوسع.',
+        viewProjects: 'شاهد المشاريع',
+        projects: 'المشاريع', skills: 'المهارات', experience: 'الخبرة', contact: 'تواصل',
+        emailCta:'إيميل', pillLoc:'تعدد اللغات (RTL/LTR)',
+        glanceTitle:'نظرة سريعة', glanceSub:'بلو راي لحلول الويب · أكثر من سنة',
+        gl1:'GoldenDrive – تأجير سيارات (يومي/شهري/اشتراك) مع NGenius',
+        gl2:'Tasali – متجر متعدد التجار مع عروض وتصنيفات',
+        gl3:'Montak Express – لوجستيات وإدارة طلبات',
+        p1desc:'تدفّقات حجز (يومي/أسبوعي/شهري/اشتراك)، إضافات ديناميكية مع تحديث فوري للأسعار، دفع بالبطاقة داخل التطبيق، وواجهة RTL/LTR.',
+        p2desc:'سوق متعدد البائعين مع بانرات وتصنيفات وصفحات علامات تجارية وتخطيطات سريعة الأداء.',
+        p3desc:'تطبيق سائق مع حالات للطلب، مسح باركود لتسليم الطرود، وتقليل الكراشات عبر أدوات QA و App Store Connect.',
+        p4desc:'تطبيق للأهل يتضمن تتبّع الطالب، الحضور، الدفعات، وواجهة ثنائية اللغة (عربي/إنجليزي).',
+        p5desc:'تطبيق تجارة إلكترونية يتضمن سلة شراء، إدارة العناوين، كوبونات خصم، وتكامل دفعات NGenius.',
+        p6desc:'تطبيق سوق إلكتروني غني بالعروض والتصنيفات مع بنية XIB سريعة.',
+        p7desc:'تطبيق لتوصيل الطعام والمشروبات مع تتبع مباشر وجدولة الطلبات وواجهة ثنائية اللغة.',
         p8desc:'تطبيق تسوّق بذكاء مع سلة وعروض وواجهة ثنائية اللغة.',
         p9desc:'محفظة رقمية للدفع عبر QR مع تتبّع الرصيد وتحويلات فورية.',
         p10desc:'تطبيق للبحث عن وظائف مع فلاتر وقوائم حسب الموقع وتنبيهات فورية.',
@@ -491,6 +539,15 @@
       });
     }, { rootMargin:'-40% 0px -55% 0px', threshold:0 });
     sections.forEach(sec=> spy.observe(sec));
+
+    // Dev self-test: ensure all data-i18n keys exist in both languages
+    (function translationSelfTest(){
+      const keys = new Set([...document.querySelectorAll('[data-i18n]')].map(el=>el.dataset.i18n));
+      ['en','ar'].forEach(lang=>{
+        const dict = i18n[lang]||{};
+        keys.forEach(k=>{ if(!(k in dict)) console.warn(`[i18n] missing key "${k}" in ${lang}`); });
+      });
+    })();
 
     // JSON-LD Schema (Person)
     const schema = {
