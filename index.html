@@ -5,10 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Abdulrahman Othman – iOS Developer</title>
   <meta name="description" content="Portfolio of Abdulrahman Othman – iOS Developer specializing in Swift, UIKit, XIB, localization, and payment integrations." />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="theme-color" id="theme-color" content="#0b0d10" />
+  <link rel="canonical" href="https://athamnah.github.io/" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Abdulrahman Othman – iOS Developer" />
+  <meta property="og:description" content="iOS Developer specialized in Swift, UIKit, XIB, localization (EN/AR), and NGenius payments." />
+  <meta property="og:url" content="https://athamnah.github.io/" />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root{
       --bg: #0b0d10;        /* dark background */
@@ -30,6 +47,7 @@
     html,body{height:100%; scroll-behavior:smooth}
     body{margin:0;font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; background:var(--bg); color:var(--text);} 
     a{color:inherit}
+    :focus-visible{outline:2px solid color-mix(in oklab, var(--brand) 65%, var(--accent)); outline-offset:2px}
 
     /* Layout utilities */
     .container{max-width:var(--maxw); margin:0 auto; padding-inline: clamp(16px, 4vw, 24px)}
@@ -42,19 +60,21 @@
     header{position:sticky;top:0; backdrop-filter:saturate(180%) blur(10px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid var(--border); z-index:100}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:60px}
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
-    .avatar{width:32px;height:32px;border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--brand)); box-shadow:var(--shadow)}
+    .avatar{width:32px;height:32px;border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--brand)); box-shadow:var(--shadow); flex:0 0 32px}
     .brand h1{font-size: clamp(14px, 2.5vw, 16px); margin:0; letter-spacing:.3px}
 
     /* Primary actions */
     .actions{display:flex; gap:8px}
-    .btn{border:1px solid var(--border); background:var(--panel); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer; box-shadow:var(--shadow); line-height:1; font-weight:600}
+    .btn{border:1px solid var(--border); background:var(--panel); color:var(--text); padding:10px 14px; border-radius:12px; cursor:pointer; box-shadow:var(--shadow); line-height:1; font-weight:600; text-decoration:none}
     .btn:hover{transform:translateY(-1px)}
+    .btn[aria-disabled="true"]{opacity:.6; pointer-events:none}
     .btn.primary{background:linear-gradient(135deg,var(--accent),var(--brand)); color:white; border:0}
 
     /* Top links */
     .links{display:flex; gap:6px; align-items:center}
     .link{padding:10px 12px; text-decoration:none; color:var(--muted); border-radius:10px}
     .link:hover{background:var(--panel); color:var(--text)}
+    .link[aria-current="page"]{color:var(--text); background:color-mix(in oklab, var(--panel) 60%, transparent)}
 
     /* Mobile menu */
     .menu-toggle{display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:12px}
@@ -99,13 +119,17 @@
     footer{padding:22px 0; border-top:1px solid var(--border); color:var(--muted)}
 
     /* Accessibility / motion */
-    @media (prefers-reduced-motion: reduce){
-      *{animation: none !important; transition: none !important}
-    }
+    @media (prefers-reduced-motion: reduce){ *{animation: none !important; transition: none !important} }
 
     /* RTL tweaks */
-    html[dir="rtl"] .hero-wrap { direction: rtl; }
     html[dir="rtl"] body { font-family: Inter, system-ui, -apple-system, Segoe UI, "Cairo", Roboto, Helvetica, Arial; }
+    html[dir="rtl"] .hero-wrap { direction: rtl; }
+
+    /* Print */
+    @media print{
+      header, .actions, .pillbar, .row a[href^="http"]::after{display:none!important}
+      .glass{box-shadow:none;border:1px solid #ccc}
+    }
   </style>
 </head>
 <body>
@@ -115,11 +139,10 @@
   <header>
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Home">
-  <img src="https://media.licdn.com/dms/image/v2/D4E03AQEZLFEDTWDb-g/profile-displayphoto-shrink_800_800/B4EZTiu3jQHMAc-/0/1738970726628?e=1760572800&v=beta&t=8pvc9VGh3mzTNOxWwtYWTajXnCoLcfJao-GF4O8cCkU" 
-       alt="Abdulrahman Othman" class="avatar">
-  <h1>Abdulrahman Othman</h1>
-</a>
-
+        <!-- Host this image in your repo to avoid hotlink/CORS; set width/height to prevent CLS -->
+        <img src="/assets/avatar.jpg" width="32" height="32" alt="Abdulrahman Othman" class="avatar" loading="eager" decoding="async" />
+        <h1>Abdulrahman Othman</h1>
+      </a>
 
       <nav aria-label="Primary" class="links menu" id="menu">
         <a class="link" href="#projects" data-i18n="projects">Projects</a>
@@ -129,19 +152,19 @@
       </nav>
 
       <div class="actions">
-        <button id="langBtn" class="btn" aria-label="Switch language">AR</button>
+        <button id="langBtn" class="btn" aria-label="Switch language" title="Switch language">AR</button>
         <button id="modeBtn" class="btn" aria-label="Toggle theme" title="Toggle theme">☾</button>
-        <button id="menuBtn" class="btn menu-toggle" aria-controls="menu" aria-expanded="false" title="Menu" style="display:none">☰</button>
+        <button id="menuBtn" class="btn menu-toggle" aria-controls="menuDropdown" aria-expanded="false" title="Menu" style="display:none" aria-haspopup="true">☰</button>
       </div>
     </div>
 
-    <!-- Mobile dropdown space -->
+    <!-- Mobile dropdown -->
     <div class="container">
-      <div id="menuDropdown" class="menu glass" style="display:none">
-        <a class="link" href="#projects" data-i18n="projects">Projects</a>
-        <a class="link" href="#skills" data-i18n="skills">Skills</a>
-        <a class="link" href="#experience" data-i18n="experience">Experience</a>
-        <a class="link" href="#contact" data-i18n="contact">Contact</a>
+      <div id="menuDropdown" class="menu glass" role="menu" style="display:none">
+        <a class="link" href="#projects" role="menuitem" data-i18n="projects">Projects</a>
+        <a class="link" href="#skills" role="menuitem" data-i18n="skills">Skills</a>
+        <a class="link" href="#experience" role="menuitem" data-i18n="experience">Experience</a>
+        <a class="link" href="#contact" role="menuitem" data-i18n="contact">Contact</a>
       </div>
     </div>
   </header>
@@ -151,30 +174,30 @@
     <section id="home" class="hero">
       <div class="container hero-wrap">
         <div>
-          <span class="badge">iOS Developer · Swift · UIKit · XIB</span>
+          <span class="badge" data-i18n="badge">iOS Developer · Swift · UIKit · XIB</span>
           <h2 class="title" data-i18n="title">Building polished iOS apps with clean architecture & beautiful UI/UX.</h2>
           <p class="subtitle" data-i18n="subtitle">Specialized in multilingual apps (EN/AR), payment integrations (NGenius), and converting Storyboards to scalable XIB architecture.</p>
 
-          <div class="pillbar">
+          <div class="pillbar" aria-label="Key skills">
             <span class="pill">Swift · UIKit · SwiftUI</span>
             <span class="pill">Alamofire · REST API</span>
-            <span class="pill">Localization (RTL/LTR)</span>
+            <span class="pill" data-i18n="pillLoc">Localization (RTL/LTR)</span>
             <span class="pill">App Store Connect</span>
           </div>
 
           <div class="row">
             <a class="btn primary" href="#projects" data-i18n="viewProjects">View Projects</a>
-            <a class="btn" href="https://github.com/Athamnah" target="_blank" rel="noopener">GitHub ↗</a>
-            <a class="btn" href="mailto:ad.e.othman03@gmail.com">Email</a>
+            <a class="btn" href="https://github.com/Athamnah" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a class="btn" href="mailto:ad.e.othman03@gmail.com" data-i18n="emailCta">Email</a>
           </div>
         </div>
         <aside class="glass card" aria-label="At a glance">
-          <h3 style="margin:0 0 8px">At a glance</h3>
-          <p style="margin:0;color:var(--muted)">Blue Ray for Web Solutions · 1+ yrs</p>
+          <h3 style="margin:0 0 8px" data-i18n="glanceTitle">At a glance</h3>
+          <p style="margin:0;color:var(--muted)" data-i18n="glanceSub">Blue Ray for Web Solutions · 1+ yrs</p>
           <ul style="margin:14px 0 0; padding-left:18px; line-height:1.9">
-            <li>GoldenDrive – car rental (daily/monthly/subscription) with NGenius</li>
-            <li>Tasali – marketplace with offers & categories</li>
-            <li>Montak Express – logistics & order management</li>
+            <li data-i18n="gl1">GoldenDrive – car rental (daily/monthly/subscription) with NGenius</li>
+            <li data-i18n="gl2">Tasali – marketplace with offers & categories</li>
+            <li data-i18n="gl3">Montak Express – logistics & order management</li>
           </ul>
         </aside>
       </div>
@@ -190,10 +213,10 @@
             <div class="thumb" aria-hidden="true"><small>GoldenDrive – iOS</small></div>
             <h3>GoldenDrive · Car Rental</h3>
             <p class="meta">Swift · UIKit · XIB · Alamofire · NGenius SDK · Localization</p>
-            <p style="margin:0">Booking flows (daily/weekly/monthly/subscription), dynamic add‑ons with real‑time price updates, in‑app card payments, and RTL/LTR UI.</p>
+            <p style="margin:0" data-i18n="p1desc">Booking flows (daily/weekly/monthly/subscription), dynamic add‑ons with real‑time price updates, in‑app card payments, and RTL/LTR UI.</p>
             <div class="row" style="margin-top:10px">
-              <a class="btn" href="#" aria-disabled="true">App Store (private)</a>
-              <a class="btn" href="#" aria-disabled="true">Case study</a>
+              <a class="btn" aria-disabled="true" tabindex="-1">App Store (private)</a>
+              <a class="btn" href="/case-studies/goldendrive.html">Case study</a>
             </div>
           </article>
           <!-- Project 2 -->
@@ -201,21 +224,36 @@
             <div class="thumb" aria-hidden="true"><small>Tasali – iOS</small></div>
             <h3>Tasali · Marketplace</h3>
             <p class="meta">Swift · REST · Caching · XIB · Analytics</p>
-            <p style="margin:0">Multi‑vendor marketplace with banners, categories, brand pages, and performance‑oriented collection layouts.</p>
+            <p style="margin:0" data-i18n="p2desc">Multi‑vendor marketplace with banners, categories, brand pages, and performance‑oriented collection layouts.</p>
             <div class="row" style="margin-top:10px">
-              <a class="btn" href="#" aria-disabled="true">TestFlight (by invite)</a>
-              <a class="btn" href="#" aria-disabled="true">Case study</a>
+              <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
+              <a class="btn" href="/case-studies/tasali.html">Case study</a>
             </div>
           </article>
           <!-- Project 3 -->
           <article class="project glass card">
             <div class="thumb" aria-hidden="true"><small>Montak Express – iOS</small></div>
-            <h3>Montak Express · Delivery</h3>
-            <p class="meta">Swift · Networking · Barcodes · CoreLocation</p>
-            <p style="margin:0">Driver app with order states, barcode scanning for parcel handover, and crash‑rate drive‑down via QA & ASC instrumentation.</p>
+            $1
+          <!-- Project 4 -->
+          <article class="project glass card">
+            <div class="thumb" aria-hidden="true"><small>School Model – iOS</small></div>
+            <h3>School Model · Parent App</h3>
+            <p class="meta">Swift · UIKit · Maps · Notifications · Localization</p>
+            <p style="margin:0" data-i18n="p4desc">Parent app with student tracking, attendance, payments, and bilingual UI (AR/EN).</p>
             <div class="row" style="margin-top:10px">
-              <a class="btn" href="#" aria-disabled="true">Internal build</a>
-              <a class="btn" href="#" aria-disabled="true">Case study</a>
+              <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
+              <a class="btn" href="/case-studies/school-model.html">Case study</a>
+            </div>
+          </article>
+          <!-- Project 5 -->
+          <article class="project glass card">
+            <div class="thumb" aria-hidden="true"><small>JaberMall – iOS</small></div>
+            <h3>JaberMall · E‑commerce</h3>
+            <p class="meta">Swift · Alamofire · Payments · Caching · Analytics</p>
+            <p style="margin:0" data-i18n="p5desc">E‑commerce app with checkout, address management, coupons, and NGenius payments integration.</p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
+              <a class="btn" href="/case-studies/jabermall.html">Case study</a>
             </div>
           </article>
         </div>
@@ -232,15 +270,15 @@
             <p class="meta">Swift, UIKit, SwiftUI, Combine, AutoLayout, XIB</p>
           </div>
           <div class="glass card">
-            <h3>Networking</h3>
+            <h3 data-i18n="net">Networking</h3>
             <p class="meta">Alamofire, URLSession, REST, JSON, Auth, Retry</p>
           </div>
           <div class="glass card">
-            <h3>Product</h3>
+            <h3 data-i18n="prod">Product</h3>
             <p class="meta">App Store Connect, Crashlytics, Firebase, A/B, Analytics</p>
           </div>
           <div class="glass card">
-            <h3>UX & Localization</h3>
+            <h3 data-i18n="ux">UX & Localization</h3>
             <p class="meta">Figma, RTL/LTR, Dynamic Type, Accessibility</p>
           </div>
         </div>
@@ -255,9 +293,9 @@
           <div class="job">
             <span class="dot" aria-hidden="true"></span>
             <div class="content glass card">
-              <h4>iOS Developer · Blue Ray for Web Solutions</h4>
-              <p>2024 – Present · Amman, Jordan</p>
-              <p style="margin-top:8px">Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.</p>
+              <h4 data-i18n="expRole">iOS Developer · Blue Ray for Web Solutions</h4>
+              <p data-i18n="expTime">2024 – Present · Amman, Jordan</p>
+              <p style="margin-top:8px" data-i18n="expBody">Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.</p>
             </div>
           </div>
         </div>
@@ -268,13 +306,13 @@
     <section id="contact">
       <div class="container glass card">
         <h2 data-i18n="contact">Contact</h2>
-        <p class="meta" style="margin:0 0 10px">Available for full‑time roles and freelance projects.</p>
+        <p class="meta" style="margin:0 0 10px" data-i18n="availability">Available for full‑time roles and freelance projects.</p>
         <div class="row">
-          <a class="btn" href="mailto:ad.e.othman03@gmail.com">ad.e.othman03@gmail.com </a>
-          <a class="btn" href="https://www.linkedin.com/in/abdulrahman-othman-048649182/" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn" href="https://github.com/Athamnah" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="mailto:ad.e.othman03@gmail.com?subject=Opportunities%20for%20iOS%20Developer&body=Hi%20Abdulrahman," rel="noopener">ad.e.othman03@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/abdulrahman-othman-048649182/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a class="btn" href="https://github.com/Athamnah" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a class="btn" href="https://wa.me/962799525660" target="_blank" rel="noopener" aria-label="WhatsApp">WhatsApp</a>
-          <a class="btn" href="#" aria-disabled="true">Download CV (PDF)</a>
+          <a class="btn" href="/cv/Abdulrahman-Othman-CV.pdf" download>Download CV (PDF)</a>
         </div>
       </div>
     </section>
@@ -287,12 +325,20 @@
   </footer>
 
   <script>
+    // Helper: safe localStorage
+    const safeStore = {
+      get(k){ try{ return localStorage.getItem(k); }catch{ return null } },
+      set(k,v){ try{ localStorage.setItem(k,v); }catch{} }
+    };
+
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Theme toggle (persisted)
+    // Theme toggle (persisted) + meta theme-color sync
     const modeBtn = document.getElementById('modeBtn');
     const THEME_KEY = 'ath-theme';
+    const themeMeta = document.getElementById('theme-color');
+
     function applyTheme(t){
       if(t === 'light'){
         document.documentElement.style.setProperty('--bg','#f7f8fa');
@@ -301,6 +347,7 @@
         document.documentElement.style.setProperty('--muted','#475467');
         document.documentElement.style.setProperty('--border','#e4e7ec');
         document.documentElement.style.setProperty('--shadow','0 10px 20px rgba(16,24,40,.08)');
+        themeMeta.setAttribute('content','#f7f8fa');
       } else {
         document.documentElement.style.setProperty('--bg','#0b0d10');
         document.documentElement.style.setProperty('--panel','#12161b');
@@ -308,46 +355,60 @@
         document.documentElement.style.setProperty('--muted','#98a2b3');
         document.documentElement.style.setProperty('--border','#1f2730');
         document.documentElement.style.setProperty('--shadow','0 10px 30px rgba(0,0,0,.35)');
+        themeMeta.setAttribute('content','#0b0d10');
       }
       document.documentElement.dataset.theme = t;
     }
-    const savedTheme = localStorage.getItem(THEME_KEY) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark');
+    const prefersLight = matchMedia('(prefers-color-scheme: light)').matches;
+    const savedTheme = safeStore.get(THEME_KEY) || (prefersLight ? 'light' : 'dark');
     applyTheme(savedTheme);
     modeBtn.addEventListener('click', ()=>{
-      const next = (localStorage.getItem(THEME_KEY) || savedTheme) === 'dark' ? 'light' : 'dark';
-      localStorage.setItem(THEME_KEY, next);
+      const cur = safeStore.get(THEME_KEY) || savedTheme;
+      const next = cur === 'dark' ? 'light' : 'dark';
+      safeStore.set(THEME_KEY, next);
       applyTheme(next);
     });
 
-    // Language (EN/AR)
+    // Language (EN/AR) – expanded coverage
     const i18n = {
-      en: {
-        title: 'Building polished iOS apps with clean architecture & beautiful UI/UX.',
-        subtitle: 'Specialized in multilingual apps (EN/AR), payment integrations (NGenius), and converting Storyboards to scalable XIB architecture.',
-        viewProjects: 'View Projects',
-        projects: 'Projects', skills: 'Skills', experience: 'Experience', contact: 'Contact'
+      $1
+        p4desc:'Parent app with student tracking, attendance, payments, and bilingual UI (AR/EN).',
+        p5desc:'E‑commerce app with checkout, address management, coupons, and NGenius payments integration.',
+        net:'Networking', prod:'Product', ux:'UX & Localization',
+        expRole:'iOS Developer · Blue Ray for Web Solutions',
+        expTime:'2024 – Present · Amman, Jordan',
+        expBody:'Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.',
+        availability:'Available for full‑time roles and freelance projects.'
       },
-      ar: {
-        title: 'ببني تطبيقات iOS مصقولة بهندسة نظيفة وتجربة مستخدم جميلة.',
-        subtitle: 'متخصص في التطبيقات ثنائية اللغة (عربي/إنجليزي)، ودمج الدفع الإلكتروني (NGenius)، وتحويل Storyboard إلى XIB قابل للتوسع.',
-        viewProjects: 'شاهد المشاريع',
-        projects: 'المشاريع', skills: 'المهارات', experience: 'الخبرة', contact: 'تواصل'
+      $1
+        p4desc:'تطبيق للأهل يتضمن تتبّع الطالب، الحضور، الدفعات، وواجهة ثنائية اللغة (عربي/إنجليزي).',
+        p5desc:'تطبيق تجارة إلكترونية يتضمن سلة شراء، إدارة العناوين، كوبونات خصم، وتكامل دفعات NGenius.',
+        net:'الشبكات', prod:'المنتج', ux:'التجربة واللغة',
+        expRole:'مطوّر iOS · بلو راي لحلول الويب',
+        expTime:'2024 – حتى الآن · عمّان، الأردن',
+        expBody:'سلّمت تطبيقات جاهزة للإنتاج للتجارة واللوجستيات والتعليم؛ نفّذت دفعات NGenius؛ نقلت Storyboards إلى XIB؛ وقُدت التعريب وتحسين الأداء.',
+        availability:'متاح لوظائف بدوام كامل ومشاريع حرة.'
       }
     };
-    const langBtn = document.getElementById('langBtn');
     const LANG_KEY = 'ath-lang';
+    const langBtn = document.getElementById('langBtn');
+
     function setLang(lang){
-      const dict = i18n[lang];
+      const dict = i18n[lang] || i18n.en;
       document.querySelectorAll('[data-i18n]').forEach(el=>{ el.textContent = dict[el.dataset.i18n] });
       document.documentElement.lang = lang === 'ar' ? 'ar' : 'en';
       document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
       langBtn.textContent = lang === 'ar' ? 'EN' : 'AR';
+      // Update SEO-visible title/description for users (note: crawlers read initial HTML)
+      document.title = lang === 'ar' ? 'عبدالرحمن عثمان – مطوّر iOS' : 'Abdulrahman Othman – iOS Developer';
+      const desc = document.querySelector('meta[name="description"]');
+      if(desc){ desc.setAttribute('content', dict.subtitle); }
     }
-    setLang(localStorage.getItem(LANG_KEY) || 'en');
+    setLang(safeStore.get(LANG_KEY) || 'en');
     langBtn.addEventListener('click', ()=>{
-      const cur = localStorage.getItem(LANG_KEY) || 'en';
+      const cur = safeStore.get(LANG_KEY) || 'en';
       const next = cur === 'en' ? 'ar' : 'en';
-      localStorage.setItem(LANG_KEY, next);
+      safeStore.set(LANG_KEY, next);
       setLang(next);
     });
 
@@ -355,23 +416,49 @@
     const mq = matchMedia('(max-width: 820px)');
     const menuBtn = document.getElementById('menuBtn');
     const menuDropdown = document.getElementById('menuDropdown');
-    function handleMenuMQ(e){
-      if(e.matches){
-        menuBtn.style.display = 'inline-flex';
-      } else {
-        menuBtn.style.display = 'none';
-        // close dropdown if resizing to desktop
-        menuDropdown.style.display = 'none';
-        menuBtn.setAttribute('aria-expanded','false');
-      }
-    }
-    handleMenuMQ(mq);
-    mq.addEventListener('change', handleMenuMQ);
-    menuBtn.addEventListener('click', ()=>{
-      const open = menuDropdown.style.display === 'grid' || menuDropdown.style.display === 'block';
-      menuDropdown.style.display = open ? 'none' : 'grid';
-      menuBtn.setAttribute('aria-expanded', String(!open));
-    });
+
+    function updateMenuBtn(e){ menuBtn.style.display = e.matches ? 'inline-flex' : 'none'; if(!e.matches){ closeMenu(); } }
+    function openMenu(){ menuDropdown.style.display = 'grid'; menuDropdown.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); }
+    function closeMenu(){ menuDropdown.style.display = 'none'; menuDropdown.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
+
+    updateMenuBtn(mq);
+    // Safari < 14 fallback
+    if(typeof mq.addEventListener === 'function'){ mq.addEventListener('change', updateMenuBtn); } else if(typeof mq.addListener === 'function'){ mq.addListener(updateMenuBtn); }
+
+    menuBtn.addEventListener('click', ()=>{ const open = menuDropdown.style.display === 'grid'; open ? closeMenu() : openMenu(); });
+    menuDropdown.addEventListener('click', e=>{ if(e.target.matches('a')) closeMenu(); });
+    document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeMenu(); });
+
+    // Scroll spy: highlight current section
+    const links = Array.from(document.querySelectorAll('nav#menu .link'));
+    const sections = links.map(a=> document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id = '#' + entry.target.id;
+          links.forEach(a=> a.setAttribute('aria-current', a.getAttribute('href')===id ? 'page' : 'false'));
+        }
+      });
+    }, { rootMargin:'-40% 0px -55% 0px', threshold:0 });
+    sections.forEach(sec=> spy.observe(sec));
+
+    // JSON-LD Schema (Person)
+    const schema = {
+      '@context': 'https://schema.org', '@type': 'Person',
+      name: 'Abdulrahman Othman',
+      jobTitle: 'iOS Developer',
+      url: 'https://athamnah.github.io/',
+      image: 'https://athamnah.github.io/assets/avatar.jpg',
+      sameAs: [
+        'https://github.com/Athamnah',
+        'https://www.linkedin.com/in/abdulrahman-othman-048649182/'
+      ],
+      address: { '@type':'PostalAddress', addressLocality:'Amman', addressCountry:'JO' }
+    };
+    const ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify(schema);
+    document.head.appendChild(ld);
   </script>
 </body>
 </html>
