@@ -1,3 +1,6 @@
+تمام — هذا الملف كامل بعد التعديل (موحّد حجم الصور ومعبّي الإطار، وشلت الـinline styles من `<img>` داخل المشاريع). انسخه مكان ملفّك الحالي:
+
+```html
 <!doctype html>
 <html lang="en" dir="ltr">
 <head>
@@ -60,7 +63,7 @@
     header{position:sticky;top:0; backdrop-filter:saturate(180%) blur(10px); background:color-mix(in oklab, var(--bg) 85%, transparent); border-bottom:1px solid var(--border); z-index:100}
     .nav{display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:60px}
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
-    .avatar{width:32px;height:32px;border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--brand)); box-shadow:var(--shadow); flex:0 0 32px}
+    .avatar{width:32px;height:32px;border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--brand)); box-shadow:var(--shadow); flex:0 0 32px; object-fit:cover}
     .brand h1{font-size: clamp(14px, 2.5vw, 16px); margin:0; letter-spacing:.3px}
 
     /* Primary actions */
@@ -102,7 +105,27 @@
     .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(14px, 2.2vw, 24px); align-items:start}
 
     .project{display:flex; flex-direction:column; gap:10px}
-    .thumb{aspect-ratio: 16/10; border-radius:12px; background:linear-gradient(135deg, color-mix(in oklab, var(--accent) 25%, transparent), color-mix(in oklab, var(--brand) 35%, transparent)); border:1px solid var(--border); position:relative; overflow:hidden}
+
+    /* ✅ Thumbnail unification */
+    .thumb{
+      aspect-ratio: 16 / 10;                    /* عدّلها لـ 16/9 أو 1/1 لو حاب */
+      border-radius:12px;
+      background:linear-gradient(135deg, color-mix(in oklab, var(--accent) 25%, transparent), color-mix(in oklab, var(--brand) 35%, transparent));
+      border:1px solid var(--border);
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb > img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;                          /* يملأ الإطار بالكامل */
+      object-position:center;
+      display:block;
+      border-radius:0;                           /* نخلي الـradius للحاوية */
+    }
+
     .thumb small{position:absolute; inset:auto 10px 10px 10px; color:#fff; opacity:.85}
     .project h3{margin:2px 0 0; font-size:18px}
     .meta{display:flex; gap:8px; flex-wrap:wrap; color:var(--muted); font-size:13px}
@@ -209,52 +232,49 @@
         <h2 data-i18n="projects">Projects</h2>
         <div class="grid">
           <!-- Project 1 -->
-         <article class="project glass card">
-  <div class="thumb">
-    <img src="https://goldndrive.com/sites/default/files/Golden-Drive_0%20%281%29.png"
-         alt="GoldenDrive logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>GoldenDrive · Car Rental</h3>
-  <p class="meta">Swift · UIKit · XIB · Alamofire · NGenius SDK · Localization</p>
-  <p style="margin:0" data-i18n="p1desc">
-    Booking flows (daily/weekly/monthly/subscription), dynamic add-ons with real-time price updates, in-app card payments, and RTL/LTR UI.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">App Store (private)</a>
-    <a class="btn" href="/case-studies/goldendrive.html">Case study</a>
-  </div>
-</article>
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="https://goldndrive.com/sites/default/files/Golden-Drive_0%20%281%29.png" alt="GoldenDrive logo" loading="lazy" />
+            </div>
+            <h3>GoldenDrive · Car Rental</h3>
+            <p class="meta">Swift · UIKit · XIB · Alamofire · NGenius SDK · Localization</p>
+            <p style="margin:0" data-i18n="p1desc">
+              Booking flows (daily/weekly/monthly/subscription), dynamic add-ons with real-time price updates, in-app card payments, and RTL/LTR UI.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">App Store (private)</a>
+              <a class="btn" href="/case-studies/goldendrive.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project 2 -->
-        <article class="project glass card">
-  <div class="thumb">
-    <img src="assets/tasali-logo.jpg?v=1"
-         alt="Tasali logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>Tasali · Marketplace</h3>
-  <p class="meta">Swift · REST · Caching · XIB · Analytics</p>
-  <p style="margin:0" data-i18n="p2desc">
-    Multi-vendor marketplace with banners, categories, brand pages, and performance-oriented collection layouts.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
-    <a class="btn" href="/case-studies/tasali.html">Case study</a>
-  </div>
-</article>
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="assets/tasali-logo.jpg?v=1" alt="Tasali logo" loading="lazy" />
+            </div>
+            <h3>Tasali · Marketplace</h3>
+            <p class="meta">Swift · REST · Caching · XIB · Analytics</p>
+            <p style="margin:0" data-i18n="p2desc">
+              Multi-vendor marketplace with banners, categories, brand pages, and performance-oriented collection layouts.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
+              <a class="btn" href="/case-studies/tasali.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project 3 -->
           <article class="project glass card">
             <div class="thumb" aria-hidden="true"><small>Montak Express – iOS</small></div>
             <h3>Montak Express · Delivery</h3>
             <p class="meta">Swift · Networking · Barcodes · CoreLocation</p>
-            <p style="margin:0" data-i18n="p3desc">Driver app with order states, barcode scanning for parcel handover, and crash‑rate drive‑down via QA & ASC instrumentation.</p>
+            <p style="margin:0" data-i18n="p3desc">Driver app with order states, barcode scanning for parcel handover, and crash-rate drive-down via QA & ASC instrumentation.</p>
             <div class="row" style="margin-top:10px">
               <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
               <a class="btn" href="/case-studies/montak.html">Case study</a>
             </div>
           </article>
+
           <!-- Project 4 -->
           <article class="project glass card">
             <div class="thumb" aria-hidden="true"><small>School Model – iOS</small></div>
@@ -266,126 +286,114 @@
               <a class="btn" href="/case-studies/school-model.html">Case study</a>
             </div>
           </article>
+
           <!-- Project 5 -->
           <article class="project glass card">
             <div class="thumb" aria-hidden="true"><small>JaberMall – iOS</small></div>
-            <h3>JaberMall · E‑commerce</h3>
+            <h3>JaberMall · E-commerce</h3>
             <p class="meta">Swift · Alamofire · Payments · Caching · Analytics</p>
-            <p style="margin:0" data-i18n="p5desc">E‑commerce app with checkout, address management, coupons, and NGenius payments integration.</p>
+            <p style="margin:0" data-i18n="p5desc">E-commerce app with checkout, address management, coupons, and NGenius payments integration.</p>
             <div class="row" style="margin-top:10px">
               <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
               <a class="btn" href="/case-studies/jabermall.html">Case study</a>
             </div>
           </article>
+
           <!-- Project 6 -->
-         <article class="project glass card">
-  <div class="thumb">
-    <img src="https://moontakjo.com/sites/default/files/styles/large/public/2024-07/logo400.png?itok=CIxEohG4"
-         alt="Montak logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>Montak · Marketplace</h3>
-  <p class="meta">Swift · UIKit · REST · Offers · Localization</p>
-  <p style="margin:0" data-i18n="p6desc">
-    Marketplace app with rich offers, categories, and fast XIB-based architecture.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
-    <a class="btn" href="/case-studies/montak-marketplace.html">Case study</a>
-  </div>
-</article>
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="https://moontakjo.com/sites/default/files/styles/large/public/2024-07/logo400.png?itok=CIxEohG4" alt="Montak logo" loading="lazy" />
+            </div>
+            <h3>Montak · Marketplace</h3>
+            <p class="meta">Swift · UIKit · REST · Offers · Localization</p>
+            <p style="margin:0" data-i18n="p6desc">
+              Marketplace app with rich offers, categories, and fast XIB-based architecture.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
+              <a class="btn" href="/case-studies/montak-marketplace.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project 7 -->
-         <article class="project glass card">
-  <div class="thumb">
-    <img src="https://play-lh.googleusercontent.com/p8grPhCOdEO4dxUdTEqICZ32gbJ1ugDLsk_s2ROJZhopXuk3kUR1yc2dkG8MT7btyUE"
-         alt="Baradak logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>Baradak · Food & Delivery</h3>
-  <p class="meta">Swift · UIKit · Location · Payments · Localization</p>
-  <p style="margin:0" data-i18n="p7desc">
-    Food & beverage delivery app with live tracking, order scheduling, and bilingual UI.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
-    <a class="btn" href="/case-studies/baradak.html">Case study</a>
-  </div>
-</article>
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="https://play-lh.googleusercontent.com/p8grPhCOdEO4dxUdTEqICZ32gbJ1ugDLsk_s2ROJZhopXuk3kUR1yc2dkG8MT7btyUE" alt="Baradak logo" loading="lazy" />
+            </div>
+            <h3>Baradak · Food & Delivery</h3>
+            <p class="meta">Swift · UIKit · Location · Payments · Localization</p>
+            <p style="margin:0" data-i18n="p7desc">
+              Food & beverage delivery app with live tracking, order scheduling, and bilingual UI.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
+              <a class="btn" href="/case-studies/baradak.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project 8 -->
-         <article class="project glass card">
-  <div class="thumb">
-    <img src="https://platin-jo.com/admin/storage/app/uploads/public/687/202/6b5/6872026b55e7b210302421.png"
-         alt="Platin logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>Platin · Commerce</h3>
-  <p class="meta">Swift · UIKit · Multi-language · Cart · Offers</p>
-  <p style="margin:0" data-i18n="p8desc">
-    Shopping app with smart cart, discounts, and bilingual support.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
-    <a class="btn" href="/case-studies/platin.html">Case study</a>
-  </div>
-</article>
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="https://platin-jo.com/admin/storage/app/uploads/public/687/202/6b5/6872026b55e7b210302421.png" alt="Platin logo" loading="lazy" />
+            </div>
+            <h3>Platin · Commerce</h3>
+            <p class="meta">Swift · UIKit · Multi-language · Cart · Offers</p>
+            <p style="margin:0" data-i18n="p8desc">
+              Shopping app with smart cart, discounts, and bilingual support.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
+              <a class="btn" href="/case-studies/platin.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project 9 -->
           <article class="project glass card">
-  <div class="thumb">
-    <img src="https://zerocash-jo.com/sites/default/files/logooo_0.png"
-         alt="ZeroCash logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>ZeroCash · Payments</h3>
-  <p class="meta">Swift · Wallet · QR · Secure Payments</p>
-  <p style="margin:0" data-i18n="p9desc">
-    Digital wallet enabling QR payments, balance tracking, and instant peer transfers.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
-    <a class="btn" href="/case-studies/zerocash.html">Case study</a>
-  </div>
-</article>
+            <div class="thumb">
+              <img src="https://zerocash-jo.com/sites/default/files/logooo_0.png" alt="ZeroCash logo" loading="lazy" />
+            </div>
+            <h3>ZeroCash · Payments</h3>
+            <p class="meta">Swift · Wallet · QR · Secure Payments</p>
+            <p style="margin:0" data-i18n="p9desc">
+              Digital wallet enabling QR payments, balance tracking, and instant peer transfers.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
+              <a class="btn" href="/case-studies/zerocash.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project 10 -->
-         <article class="project glass card">
-  <div class="thumb">
-    <img src="https://wathefty.com/layout/img/wathefty-logo-white.png"
-         alt="Wozefati logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>Wozefati · Job Finder</h3>
-  <p class="meta">Swift · REST · Push Notifications · Maps</p>
-  <p style="margin:0" data-i18n="p10desc">
-    Job search app with filters, location-based listings, and instant alerts.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
-    <a class="btn" href="/case-studies/wozefati.html">Case study</a>
-  </div>
-</article>
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="https://wathefty.com/layout/img/wathefty-logo-white.png" alt="Wozefati logo" loading="lazy" />
+            </div>
+            <h3>Wozefati · Job Finder</h3>
+            <p class="meta">Swift · REST · Push Notifications · Maps</p>
+            <p style="margin:0" data-i18n="p10desc">
+              Job search app with filters, location-based listings, and instant alerts.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">Internal build</a>
+              <a class="btn" href="/case-studies/wozefati.html">Case study</a>
+            </div>
+          </article>
 
           <!-- Project: Jabr Mall -->
-<article class="project glass card">
-  <div class="thumb">
-    <img src="https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/535015771_1191907776304203_2752169667571020443_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=1YqBPiSZvC0Q7kNvwEOQgr8&_nc_oc=AdnWHna64n0gUl_NQ5lbyfbwMLkXc7xoud9QhsSJ3idewAwNQxKchmA02Tea44DxOeY&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=RQRqAaq51nB7rZX6I09MGQ&oh=00_Afb7V03AeuN78XCdwzgQUD_MarPSOd2SR6Nh1Vv4iJPipw&oe=68CF29EC"
-         alt="Jabr Mall logo"
-         style="width:100%;height:100%;object-fit:cover;border-radius:12px;" loading="lazy" />
-  </div>
-  <h3>Jabr Mall · E-commerce</h3>
-  <p class="meta">Swift · Alamofire · Payments · Caching · Analytics</p>
-  <p style="margin:0" data-i18n="pJabrDesc">
-    E-commerce app with checkout, address management, coupons, and NGenius payments integration.
-  </p>
-  <div class="row" style="margin-top:10px">
-    <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
-    <a class="btn" href="/case-studies/jabr-mall.html">Case study</a>
-  </div>
-</article>
-
-
+          <article class="project glass card">
+            <div class="thumb">
+              <img src="https://scontent.famm11-1.fna.fbcdn.net/v/t39.30808-6/535015771_1191907776304203_2752169667571020443_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=1YqBPiSZvC0Q7kNvwEOQgr8&_nc_oc=AdnWHna64n0gUl_NQ5lbyfbwMLkXc7xoud9QhsSJ3idewAwNQxKchmA02Tea44DxOeY&_nc_zt=23&_nc_ht=scontent.famm11-1.fna&_nc_gid=RQRqAaq51nB7rZX6I09MGQ&oh=00_Afb7V03AeuN78XCdwzgQUD_MarPSOd2SR6Nh1Vv4iJPipw&oe=68CF29EC" alt="Jabr Mall logo" loading="lazy" referrerpolicy="no-referrer" />
+            </div>
+            <h3>Jabr Mall · E-commerce</h3>
+            <p class="meta">Swift · Alamofire · Payments · Caching · Analytics</p>
+            <p style="margin:0" data-i18n="pJabrDesc">
+              E-commerce app with checkout, address management, coupons, and NGenius payments integration.
+            </p>
+            <div class="row" style="margin-top:10px">
+              <a class="btn" aria-disabled="true" tabindex="-1">TestFlight (by invite)</a>
+              <a class="btn" href="/case-studies/jabr-mall.html">Case study</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -425,7 +433,7 @@
             <div class="content glass card">
               <h4 data-i18n="expRole">iOS Developer · Blue Ray for Web Solutions</h4>
               <p data-i18n="expTime">2024 – Present · Amman, Jordan</p>
-              <p style="margin-top:8px" data-i18n="expBody">Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.</p>
+              <p style="margin-top:8px" data-i18n="expBody">Delivered production-ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.</p>
             </div>
           </div>
         </div>
@@ -436,7 +444,7 @@
     <section id="contact">
       <div class="container glass card">
         <h2 data-i18n="contact">Contact</h2>
-        <p class="meta" style="margin:0 0 10px" data-i18n="availability">Available for full‑time roles and freelance projects.</p>
+        <p class="meta" style="margin:0 0 10px" data-i18n="availability">Available for full-time roles and freelance projects.</p>
         <div class="row">
           <a class="btn" href="mailto:ad.e.othman03@gmail.com?subject=Opportunities%20for%20iOS%20Developer&body=Hi%20Abdulrahman," rel="noopener">ad.e.othman03@gmail.com</a>
           <a class="btn" href="https://www.linkedin.com/in/abdulrahman-othman-048649182/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -512,11 +520,11 @@
         gl1:'GoldenDrive – car rental (daily/monthly/subscription) with NGenius',
         gl2:'Tasali – marketplace with offers & categories',
         gl3:'Montak Express – logistics & order management',
-        p1desc:'Booking flows (daily/weekly/monthly/subscription), dynamic add‑ons with real‑time price updates, in‑app card payments, and RTL/LTR UI.',
-        p2desc:'Multi‑vendor marketplace with banners, categories, brand pages, and performance‑oriented collection layouts.',
-        p3desc:'Driver app with order states, barcode scanning for parcel handover, and crash‑rate drive‑down via QA & ASC instrumentation.',
+        p1desc:'Booking flows (daily/weekly/monthly/subscription), dynamic add-ons with real-time price updates, in-app card payments, and RTL/LTR UI.',
+        p2desc:'Multi-vendor marketplace with banners, categories, brand pages, and performance-oriented collection layouts.',
+        p3desc:'Driver app with order states, barcode scanning for parcel handover, and crash-rate drive-down via QA & ASC instrumentation.',
         p4desc:'Parent app with student tracking, attendance, payments, and bilingual UI (AR/EN).',
-        p5desc:'E‑commerce app with checkout, address management, coupons, and NGenius payments integration.',
+        p5desc:'E-commerce app with checkout, address management, coupons, and NGenius payments integration.',
         p6desc:'Marketplace app with rich offers, categories, and fast XIB-based architecture.',
         p7desc:'Food & beverage delivery app with live tracking, order scheduling, and bilingual UI.',
         p8desc:'Shopping app with smart cart, discounts, and bilingual support.',
@@ -525,8 +533,8 @@
         net:'Networking', prod:'Product', ux:'UX & Localization',
         expRole:'iOS Developer · Blue Ray for Web Solutions',
         expTime:'2024 – Present · Amman, Jordan',
-        expBody:'Delivered production‑ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.',
-        availability:'Available for full‑time roles and freelance projects.'
+        expBody:'Delivered production-ready apps across commerce, logistics, and education; implemented NGenius payments; migrated Storyboards to XIB; championed localization and performance.',
+        availability:'Available for full-time roles and freelance projects.'
       },
       ar: {
         badge: 'مطوّر iOS · سويفت · UIKit · XIB',
@@ -637,3 +645,4 @@
   </script>
 </body>
 </html>
+```
